@@ -48,6 +48,8 @@
         .btn-login:hover { background: #a8324f; }
         .btn-login:active { transform: scale(0.97); }
         #error-msg { margin-top: 15px; font-size: 13px; color: #ff4d4d; min-height: 20px; font-weight: 500; }
+        
+        /* Kembalikan warna pink untuk hint */
         .hint-text { color: #ffb6c1; font-weight: bold; letter-spacing: 0.5px; }
 
         .shake { animation: shake 0.4s; }
@@ -64,11 +66,11 @@
         
         <div class="input-group">
             <label>Username</label>
-            <input type="text" id="username" placeholder="Masukkan ID">
+            <input type="text" id="username" placeholder="Masukkan ID (Bebas)">
         </div>
         <div class="input-group">
             <label>Password</label>
-            <input type="password" id="password" placeholder="Masukkan Sandi">
+            <input type="password" id="password" placeholder="Masukkan Sandi Rahasia">
         </div>
         
         <button class="btn-login" onclick="prosesLogin()">Masuk</button>
@@ -79,23 +81,26 @@
         let salahBerapaKali = 0;
 
         function prosesLogin() {
+            // Tetap ubah ke huruf kecil biar gampang ngeceknya
             const passwordInput = document.getElementById('password').value.toLowerCase().trim();
             const errorMsg = document.getElementById('error-msg');
             const loginCard = document.getElementById('login-card');
 
-            if (passwordInput === "valentine day" || passwordInput === "valentineday") {
-                // Berhasil! Kasih efek memudar lalu pindah ke halaman surat
+            // Cek password ASLI: "lyta"
+            if (passwordInput === "lyta") {
+                // Berhasil! 
                 errorMsg.style.color = "#4CAF50";
                 errorMsg.innerHTML = "Akses Diterima! Mengalihkan...";
                 loginCard.style.opacity = '0';
                 loginCard.style.transform = 'scale(0.9)';
                 
                 setTimeout(() => {
-                    // Pindah ke file surat.html
+                    // Pindah ke file valentine.html
                     window.location.href = 'valentine.html';
                 }, 1000);
                 
             } else {
+                // Salah! Dan tampilkan HINT PALSU "valentine day"
                 salahBerapaKali++;
                 loginCard.classList.remove("shake");
                 void loginCard.offsetWidth; 
